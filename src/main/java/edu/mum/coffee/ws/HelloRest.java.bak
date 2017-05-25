@@ -1,0 +1,55 @@
+package edu.mum.coffee.ws;
+
+import java.util.List;
+
+import javax.inject.Inject;
+import javax.ws.rs.DefaultValue;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.QueryParam;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import edu.mum.coffee.service.OrderService;
+import edu.mum.coffee.service.PersonService;
+
+//without xml springMVC only annotation :http://www.cnblogs.com/chry/p/6239510.html
+//http://localhost:8080/coffeeShop/webservices/hello
+
+@RestController
+@Path("/webservices/")
+public class HelloRest {
+	
+	// Not the best way of doing it, but it works for this project
+	@Autowired
+	private OrderService orderService ;
+	
+	private PersonService personService = new PersonService();
+	
+	@GET
+	public String helloWorld(@DefaultValue("Gorgeous") @QueryParam("name") String name) {
+		return "Hello "+name+"!";
+	}
+	
+	@RequestMapping("/rest/orderRestFul")
+	public String helloWorld1(@DefaultValue("Gorgeous") @QueryParam("name") String name) {
+		return "Hello "+name+"!";
+	}
+	
+	@Path("test")
+	@GET
+	public String getAirlineTest() {
+		System.out.println("orderService.toString():"+orderService.toString());
+		System.out.println("personService.toString():"+personService.toString());
+		String result = "Nil!";
+		System.out.println("testhello");
+		return result;
+	}
+	
+	
+	
+	
+	
+}
